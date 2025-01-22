@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from datetime import timedelta
-import pytz  # Add this import
+import pytz
 
 class Countdown(models.Model):
     admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='counters')

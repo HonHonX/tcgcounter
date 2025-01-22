@@ -27,11 +27,11 @@
     </script>
 </head>
 <body>
-    {% load tz %} <!-- Load the tz template tag library -->
+    {% load tz %}
     {% if counter %}
         <h1>Countdown</h1>
         <p>Time Remaining: <span id="time_remaining">{{ time_remaining }}</span> seconds</p>
-        <p>Ends at: {{ counter.end_time|timezone:"Europe/Berlin" }}</p> <!-- Convert end_time to Berlin timezone -->
+        <p>Ends at: {{ counter.end_time|timezone:"Europe/Berlin" }}</p>
     {% else %}
         <p>No active countdown</p>
     {% endif %}

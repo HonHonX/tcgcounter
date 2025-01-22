@@ -9,7 +9,7 @@ def counter_view(request):
         'counter': counter,
         'time_remaining': counter.time_remaining() if counter else None,
     }
-    return render(request, 'countdown/counter.html', context)  # Ensure it points to counter.html in templates/countdown
+    return render(request, 'countdown/counter.html', context)
 
 @login_required
 def admin_counter_view(request):
@@ -17,4 +17,4 @@ def admin_counter_view(request):
         duration = int(request.POST['duration'])
         Countdown.objects.create(admin=request.user, duration_minutes=duration)
         return redirect('counter')
-    return render(request, 'countdown/admin_counter.html')  # Ensure it points to admin_counter.html in templates/countdown
+    return render(request, 'countdown/admin_counter.html')
