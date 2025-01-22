@@ -1,0 +1,50 @@
+:root {
+    --primary-color: #9e479e;
+}
+
+body {
+    font-family: Tahoma, sans-serif, sans-serif;
+    background-color: #2b2b2b;
+    color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+h1 {
+    color: var(--primary-color);
+}
+
+form {
+    margin-top: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+input, button {
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+}
+
+img {
+    border-radius: 1rem;
+}

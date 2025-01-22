@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Countdown</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
     <script>
         function startCountdown(duration) {
             var timer = duration, minutes, seconds;
@@ -29,11 +31,35 @@
 <body>
     {% load tz %}
     {% if counter %}
-        <h1>Countdown</h1>
-        <p>Time Remaining: <span id="time_remaining">{{ time_remaining }}</span> seconds</p>
-        <p>Ends at: {{ counter.end_time|timezone:"Europe/Berlin" }}</p>
+        <img src="{% static 'yu-gi-oh-time-to-duel.gif' %}" alt="Yu-Gi-Oh Time to Duel">
+        <h1>Countdown bis zur nächsten Runde</h1>
+        <p>Verbleibende Zeit: <span id="time_remaining">{{ time_remaining }}</span></p>
+        <p>Endet um: {{ counter.end_time|timezone:"Europe/Berlin" }}</p>
     {% else %}
-        <p>No active countdown</p>
+        <p>Es gibt aktuell keinen aktiven Countdown.</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <form method="POST" action="{% url 'admin_counter' %}">
+            {% csrf_token %}
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" value="45" required>
+            <button type="submit">Set New Countdown</button>
+        </form>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" name="logout">Logout</button>
+        </form>
+    {% else %}
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
     {% endif %}
 </body>
 </html>

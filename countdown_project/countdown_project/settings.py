@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-9sw((6r^n@sjb-@xhfzfpolb@4$3p2$1udhojre_y6^2z2s1)z
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['yugiohcounter.eu.pythonanywhere.com']  # Revert to empty list
+ALLOWED_HOSTS = ['yugiohcounter.eu.pythonanywhere.com', '127.0.0.1']  # Add '127.0.0.1' to the list
 
 
 # Application definition
@@ -123,10 +123,15 @@ USE_TZ = True
 STATIC_URL = '/static/' 
 STATIC_ROOT = os.path.join(BASE_DIR, 'collectstatic')  # Set to collectstatic directory
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'templates', 'countdown'),
+    os.path.join(BASE_DIR, 'static'),  # Ensure this directory is correctly set
 ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGOUT_REDIRECT_URL = '/counter/'  # Update this line to set the logout redirect URL
+LOGIN_REDIRECT_URL = '/counter/'  # Update this line to set the login redirect URL
+
+CSRF_FAILURE_VIEW = 'countdown_project.views.csrf_failure'  # Add this line to set the CSRF failure view

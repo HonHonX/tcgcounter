@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static css_file %}">
+    <script>
+        function startCountdown(duration) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                document.getElementById('time_remaining').textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = 0;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var timeRemaining = {{ time_remaining }};
+            startCountdown(timeRemaining);
+        };
+    </script>
+</head>
+<body>
+    {% load tz %}
+    {% if counter %}
+        <h1>Countdown</h1>
+        <p>Time Remaining: <span id="time_remaining">{{ time_remaining }}</span> seconds</p>
+        <p>Ends at: {{ counter.end_time|timezone:"Europe/Berlin" }}</p>
+    {% else %}
+        <p>No active countdown</p>
+    {% endif %}
+
+    {% if user.is_authenticated %}
+        <p>Welcome, {{ user.username }}!</p>
+        <form method="POST" action="{% url 'admin_counter' %}">
+            {% csrf_token %}
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" id="duration" name="duration" value="45" required>
+            <button type="submit">Set New Countdown</button>
+        </form>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit" name="logout">Logout</button>
+        </form>
+    {% else %}
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    {% endif %}
+</body>
+</html>
