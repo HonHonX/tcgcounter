@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Countdown</title>
+    <script>
+        function startCountdown(duration) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                document.getElementById('time_remaining').textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    timer = 0;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var timeRemaining = {{ time_remaining }};
+            startCountdown(timeRemaining);
+        };
+    </script>
+</head>
+<body>
+    {% load tz %} <!-- Load the tz template tag library -->
+    {% if counter %}
+        <h1>Countdown</h1>
+        <p>Time Remaining: <span id="time_remaining">{{ time_remaining }}</span> seconds</p>
+        <p>Ends at: {{ counter.end_time|timezone:"Europe/Berlin" }}</p> <!-- Convert end_time to Berlin timezone -->
+    {% else %}
+        <p>No active countdown</p>
+    {% endif %}
+</body>
+</html>
