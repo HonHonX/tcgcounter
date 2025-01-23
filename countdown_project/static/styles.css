@@ -14,11 +14,13 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    font-size: 16px;
+    font-size: 18px; /* Increase font size for better readability */
 }
 
 h1 {
     color: var(--primary-color);
+    font-size: 2rem; /* Increase heading size */
+
 }
 
 form {
@@ -27,12 +29,20 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
+    width: 100%; /* Ensure form takes full width */
+    max-width: 500px; /* Limit the maximum width of the form */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to form */
+    padding: 2rem; /* Add padding to form for better appearance */
+    background-color: #3b3b3b; /* Add background color to form */
+    border-radius: 1rem; /* Add border radius to form */
 }
 
 input, button {
     padding: 1rem;
     margin: 0.5rem;
     border-radius: 1rem;
+    font-size: 1.2rem; /* Increase input and button font size */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to inputs and buttons */
 }
 
 button {
@@ -43,8 +53,33 @@ button {
 
 button:hover {
     background-color: var(--primary-color);
+    transform: scale(1.1);
 }
 
 img {
     border-radius: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow to images */
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 600px) {
+    body {
+        font-size: 40px; /* Further increase font size for larger screens */
+    }
+
+    img {
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 2.5rem; /* Further increase heading size for larger screens */
+    }
+
+    form {
+        max-width: 600px; /* Increase the maximum width of the form for larger screens */
+    }
+
+    input, button {
+        font-size: 2.2rem; /* Further increase input and button font size */
+    }
 }
